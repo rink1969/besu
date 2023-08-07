@@ -234,6 +234,7 @@ public abstract class AbstractCallOperation extends AbstractOperation {
             .miningBeneficiary(frame.getMiningBeneficiary())
             .blockHashLookup(frame.getBlockHashLookup())
             .maxStackSize(frame.getMaxStackSize())
+            .versionedHashes(frame.getVersionedHashes())
             .build();
     frame.incrementRemainingGas(cost);
 
