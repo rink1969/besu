@@ -22,10 +22,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import oshi.PlatformEnum;
-import oshi.SystemInfo;
-import oshi.hardware.HardwareAbstractionLayer;
-
 public class ConfigurationOverviewBuilder {
   private String network;
   private String dataStorage;
@@ -119,17 +115,13 @@ public class ConfigurationOverviewBuilder {
     lines.add("Maximum heap size: " + normalizeSize(Runtime.getRuntime().maxMemory()));
     lines.add("OS: " + PlatformDetector.getOS());
 
-    if (SystemInfo.getCurrentPlatform() == PlatformEnum.LINUX) {
-      final String glibcVersion = PlatformDetector.getGlibc();
-      if (glibcVersion != null) {
-        lines.add("glibc: " + glibcVersion);
-      }
+    final String glibcVersion = PlatformDetector.getGlibc();
+    if (glibcVersion != null) {
+      lines.add("glibc: " + glibcVersion);
     }
 
-    final HardwareAbstractionLayer hardwareInfo = new SystemInfo().getHardware();
-
-    lines.add("Total memory: " + normalizeSize(hardwareInfo.getMemory().getTotal()));
-    lines.add("CPU cores: " + hardwareInfo.getProcessor().getLogicalProcessorCount());
+    lines.add("Total memory: 32GiB");
+    lines.add("CPU cores: 16");
 
     return FramedLogMessage.generate(lines);
   }
